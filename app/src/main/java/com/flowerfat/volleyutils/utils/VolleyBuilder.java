@@ -54,7 +54,7 @@ public class VolleyBuilder extends BaseBuilder {
         return this;
     }
 
-    public VolleyBuilder addParams(String key, String val) {
+    public VolleyBuilder addParam(String key, String val) {
         if (this.params == null) {
             this.params = new IdentityHashMap();
         }

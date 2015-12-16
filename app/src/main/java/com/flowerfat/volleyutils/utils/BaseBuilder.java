@@ -28,7 +28,7 @@ public abstract class BaseBuilder {
 
     public abstract BaseBuilder params(Map<String, String> var1);
 
-    public abstract BaseBuilder addParams(String var1, String var2);
+    public abstract BaseBuilder addParam(String var1, String var2);
 
     public abstract BaseBuilder headers(Map<String, String> var1);
 

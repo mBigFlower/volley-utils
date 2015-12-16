@@ -9,6 +9,8 @@ import android.widget.TextView;
 import com.flowerfat.volleyutils.io.Callback;
 import com.flowerfat.volleyutils.utils.VolleyUtils;
 
+import java.util.HashMap;
+
 /**
  * Created by Bigflower on 2015/12/15.
  *
@@ -46,10 +48,29 @@ public class MainActivity extends AppCompatActivity {
         VolleyUtils.getInstance()
                 .get()
                 .url("http://www.baidu.com")
+                .addParam("username","bigflower")
+                .addHeader("Charset", "UTF-8")
+                .addHeader("content-type", "application/x-www-form-urlencoded")
                 .Go(new Callback<String>() {
                     @Override
                     public void onSuccess(String response) {
                         contentTV.setText(response);
+                    }
+
+                    @Override
+                    public void onError(String errorInfo) {
+
+                    }
+                });
+
+        VolleyUtils.getInstance()
+                .get("http://www.baidu.com")
+                .params(new HashMap<>())
+                .headers(new HashMap<>())
+                .Go(new Callback() {
+                    @Override
+                    public void onSuccess(Object response) {
+
                     }
 
                     @Override
