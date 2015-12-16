@@ -21,10 +21,10 @@
 - 最基本的四种请求：get, post, delete, put
 - 添加header
 - 取消请求
+- DIY封装Callback
 
 ## 后续添加
 
-- 自定义封装Callback
 - 自动缓存cookie
 - https (找不到资料，有谁会啊)
 - 【邓超的小儿子】
@@ -157,7 +157,7 @@
 这样我们直接在MainActivity中，这样：
 
 	...
-	.Go(new Callback<String>() {
+	.Go(true, new Callback<String>() {
             @Override
             public void onSuccess(String data) {
 				// 这里data就是我们要处理的数据
@@ -171,3 +171,6 @@
                 Toast.makeText(MainActivity.this, errorInfo, Toast.LENGTH_SHORT).show();
             }
         });
+
+详情见 VolleyRequestDIY 类, 使用DIY类的话，在Go()中第一个传true
+
