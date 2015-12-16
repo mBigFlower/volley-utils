@@ -5,23 +5,23 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.flowerfat.volleyutils.io.Callback;
 
-import org.json.JSONObject;
-
 /**
  * Created by bigflower on 2015/12/16.
  */
 public class VolleyRequest {
 
+    public VolleyRequest(){}
+
     public VolleyRequest(VolleyBuilder builder, final Callback listener) {
         final StringRequest request = new StringRequest(builder.method, builder.url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                doVolleyResponse(response, listener);
+                listener.onSuccess(response);
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                listener.onError("网络请求出错：\n" + error.getMessage());
+                listener.onError("错误提示：" + error.getMessage());
             }
         });
 
@@ -38,27 +38,6 @@ public class VolleyRequest {
             request.setRetryPolicy(builder.mRetryPolicy);
         // Go
         VolleyUtils.getInstance().build(request);
-    }
-
-
-    private void doVolleyResponse(String volleyResponse, Callback<String> listener){
-        try {
-            JSONObject response = new JSONObject(volleyResponse);
-            int responseCode = response.getInt("errorCode");
-            switch (responseCode) {
-                case 0:
-                    listener.onSuccess(response.getString("data"));
-                    break;
-                case 1:
-                    listener.onError("1.手机号格式不对");
-                    break;
-                case 2:
-                    listener.onError("2.系统出错");
-                    break;
-            }
-        } catch (Exception e) {
-            listener.onError("catch : "+e.getMessage());
-        }
     }
 
 }

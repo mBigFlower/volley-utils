@@ -12,7 +12,8 @@ import java.util.Map;
  */
 public class VolleyBuilder extends BaseBuilder {
 
-    public VolleyBuilder() {}
+    public VolleyBuilder() {
+    }
 
     public VolleyBuilder(int method) {
         this.method = method;
@@ -82,11 +83,21 @@ public class VolleyBuilder extends BaseBuilder {
         return this;
     }
 
-    public VolleyRequest Go(Callback listener) {
+    public void Go(Callback listener) {
         if (this.params != null) {
             this.url = this.appendParams(this.url, this.params);
         }
-        return new VolleyRequest(this, listener);
+        new VolleyRequest(this, listener);
+    }
+
+    public void Go(boolean isDIY, Callback listener) {
+        if (this.params != null) {
+            this.url = this.appendParams(this.url, this.params);
+        }
+        if (isDIY)
+            new VolleyRequest(this, listener);
+        else
+            new VolleyRequestDIY(this, listener);
     }
 
 }
