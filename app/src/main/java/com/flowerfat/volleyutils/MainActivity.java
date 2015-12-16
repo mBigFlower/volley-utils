@@ -5,15 +5,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.flowerfat.volleyutils.io.Callback;
 import com.flowerfat.volleyutils.utils.VolleyUtils;
 
-import java.util.HashMap;
-
 /**
  * Created by Bigflower on 2015/12/15.
- *
+ * <p>
  * You should make the VolleyUtils's init at your application
  */
 
@@ -49,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
                 .get()
                 .url("http://www.baidu.com")
                 .tag("MainActivity")
-                .addParam("username","bigflower")
+                .addParam("username", "bigflower")
                 .addHeader("Charset", "UTF-8")
                 .addHeader("content-type", "application/x-www-form-urlencoded")
                 .Go(new Callback<String>() {
@@ -60,25 +59,17 @@ public class MainActivity extends AppCompatActivity {
 
                     @Override
                     public void onError(String errorInfo) {
-
-                    }
-                });
-
-        VolleyUtils.getInstance()
-                .get("http://www.baidu.com")
-                .params(new HashMap<>())
-                .headers(new HashMap<>())
-                .Go(new Callback() {
-                    @Override
-                    public void onSuccess(Object response) {
-
-                    }
-
-                    @Override
-                    public void onError(String errorInfo) {
-
+                        Toast.makeText(MainActivity.this, errorInfo, Toast.LENGTH_SHORT).show();
                     }
                 });
     }
 
+
+
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        VolleyUtils.getInstance().cancel("MainActivity");
+    }
 }
