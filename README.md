@@ -1,5 +1,6 @@
 # volley-utils
 
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="http://music.163.com/outchain/player?type=2&id=28661564&auto=1&height=66"></iframe>
 
 最近看了hongyang大哥对[okhttp的封装](https://github.com/hongyangAndroid/okhttp-utils)，恰好昨天没事，也整了个Volley的
 
@@ -27,6 +28,7 @@
 
 - 自定义封装Callback
 - 自动缓存cookie
+- https (找不到资料，有谁会啊)
 - 【邓超的小儿子】
 
 ## 用法示例
@@ -36,6 +38,7 @@
 	VolleyUtils.getInstance()
                 .get()
                 .url("http://www.baidu.com")
+				.tag("MainActivity")
                 .addParam("username","bigflower")
                 .addHeader("Charset", "UTF-8")
                 .addHeader("content-type", "application/x-www-form-urlencoded")

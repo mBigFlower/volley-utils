@@ -45,20 +45,33 @@ public class VolleyUtils {
     public VolleyBuilder get() {
         return new VolleyBuilder();
     }
+
     public VolleyBuilder get(String url) {
-        return new VolleyBuilder();
+        return new VolleyBuilder(Request.Method.GET, url);
     }
 
     public VolleyBuilder post() {
         return new VolleyBuilder(Request.Method.POST);
     }
 
+    public VolleyBuilder post(String url) {
+        return new VolleyBuilder(Request.Method.POST, url);
+    }
+
     public VolleyBuilder delete() {
         return new VolleyBuilder(Request.Method.DELETE);
     }
 
+    public VolleyBuilder delete(String url) {
+        return new VolleyBuilder(Request.Method.DELETE, url);
+    }
+
     public VolleyBuilder put() {
         return new VolleyBuilder(Request.Method.PUT);
+    }
+
+    public VolleyBuilder put(String url) {
+        return new VolleyBuilder(Request.Method.PUT, url);
     }
 
     /////////////////////////////////////

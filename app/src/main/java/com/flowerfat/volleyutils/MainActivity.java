@@ -48,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
         VolleyUtils.getInstance()
                 .get()
                 .url("http://www.baidu.com")
+                .tag("MainActivity")
                 .addParam("username","bigflower")
                 .addHeader("Charset", "UTF-8")
                 .addHeader("content-type", "application/x-www-form-urlencoded")
