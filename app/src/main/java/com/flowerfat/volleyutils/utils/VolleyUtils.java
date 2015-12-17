@@ -1,6 +1,7 @@
 package com.flowerfat.volleyutils.utils;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -12,8 +13,12 @@ import com.android.volley.toolbox.Volley;
 public class VolleyUtils {
 
     public static final int DEFAULT_MILLISECONDS = 10 * 1000;
+
     private static VolleyUtils mInstance;
     private RequestQueue mRequestQueue;
+
+    private SharedPreferences cookiePrefs;
+    private boolean isAutoCookie = false;
 
     public static VolleyUtils getInstance() {
         if (mInstance == null) {
@@ -28,7 +33,13 @@ public class VolleyUtils {
     }
 
     public void init(Context context) {
+        init(context, false);
+    }
+
+    public void init(Context context, boolean isAutoCookie) {
         mRequestQueue = Volley.newRequestQueue(context);
+        cookiePrefs = context.getSharedPreferences("CookiePrefsFile", 0);
+        this.isAutoCookie = isAutoCookie ;
     }
 
     public void cancel(Object tag) {
@@ -78,6 +89,25 @@ public class VolleyUtils {
 
     public void build(Request request) {
         mRequestQueue.add(request);
+    }
+
+    /////////////////////////////////////
+
+    public void setAutoCookie(boolean isAutoCookie){
+        this.isAutoCookie = isAutoCookie ;
+    }
+
+    public void setCookie(String cookie) {
+        if (isAutoCookie)
+            cookiePrefs.edit().putString("cookie", cookie).apply();
+    }
+
+    public String getCookie() {
+        if (isAutoCookie)
+            return cookiePrefs.getString("cookie", null);
+        else {
+            return null ;
+        }
     }
 
 }

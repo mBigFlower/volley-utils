@@ -1,6 +1,7 @@
 package com.flowerfat.volleyutils.utils;
 
 import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
 import com.flowerfat.volleyutils.io.Callback;
 
 import java.util.IdentityHashMap;
@@ -84,20 +85,17 @@ public class VolleyBuilder extends BaseBuilder {
     }
 
     public void Go(Callback listener) {
-        if (this.params != null) {
+        if (this.params != null && this.method == Request.Method.GET) {
             this.url = this.appendParams(this.url, this.params);
         }
         new VolleyRequest(this, listener);
     }
 
-    public void Go(boolean isDIY, Callback listener) {
-        if (this.params != null) {
+    public void GoDIY(Callback listener) {
+        if (this.params != null && this.method == Request.Method.GET) {
             this.url = this.appendParams(this.url, this.params);
         }
-        if (isDIY)
-            new VolleyRequest(this, listener);
-        else
-            new VolleyRequestDIY(this, listener);
+        new VolleyRequestDIY(this, listener);
     }
 
 }

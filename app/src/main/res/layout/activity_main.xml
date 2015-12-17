@@ -12,6 +12,20 @@
         android:onClick="buttonClick"
         android:text="get"/>
 
+    <Button
+        android:id="@+id/main_postBt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="buttonClick"
+        android:text="post"/>
+
+    <Button
+        android:id="@+id/main_callbackBt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="buttonClick"
+        android:text="yourself callback" />
+
     <TextView
         android:id="@+id/main_content"
         android:layout_width="wrap_content"

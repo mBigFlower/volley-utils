@@ -17,7 +17,7 @@ public class MyApplication extends Application {
 
         myApplication = this; // 单例
 
-        VolleyUtils.getInstance().init(this);
+        VolleyUtils.getInstance().init(this, true);
 
     }
 
