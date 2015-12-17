@@ -52,7 +52,7 @@ public class VolleyUtils {
 
 
     /////////////////////////////////////
-
+    // 四种请求方法
     public VolleyBuilder get() {
         return new VolleyBuilder();
     }
@@ -86,12 +86,13 @@ public class VolleyUtils {
     }
 
     /////////////////////////////////////
-
+    // 开始请求
     public void build(Request request) {
         mRequestQueue.add(request);
     }
 
     /////////////////////////////////////
+    // cookie部分
 
     public void setAutoCookie(boolean isAutoCookie){
         this.isAutoCookie = isAutoCookie ;

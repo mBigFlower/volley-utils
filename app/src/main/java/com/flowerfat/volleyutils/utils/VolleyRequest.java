@@ -18,14 +18,15 @@ public class VolleyRequest {
     private StringRequest request;
 
     public VolleyRequest(VolleyBuilder builder, final Callback listener) {
+
+        setCookie(builder);
+
         Log.d("VolleyRequestDIY", "==========================================");
         Log.i("VolleyRequestDIY", "method:" + builder.method);
         Log.i("VolleyRequestDIY", "url:" + builder.url);
         Log.i("VolleyRequestDIY", "params:" + builder.params);
         Log.i("VolleyRequestDIY", "headers:" + builder.headers);
         Log.d("VolleyRequestDIY", "==========================================");
-
-        setCookie(builder);
 
         if (builder.method == Request.Method.GET || builder.method == Request.Method.DELETE) {
             getAndDelete(builder, listener);

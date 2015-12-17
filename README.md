@@ -22,10 +22,10 @@
 - 添加header
 - 取消请求
 - DIY封装Callback
+- 自动缓存cookie
 
 ## 后续添加
 
-- 自动缓存cookie
 - https (找不到资料，有谁会啊)
 - 【邓超的小儿子】
 
@@ -157,7 +157,7 @@
 这样我们直接在MainActivity中，这样：
 
 	...
-	.Go(true, new Callback<String>() {
+	.GoDIY(new Callback<String>() {
             @Override
             public void onSuccess(String data) {
 				// 这里data就是我们要处理的数据
@@ -172,5 +172,28 @@
             }
         });
 
-详情见 VolleyRequestDIY 类, 使用DIY类的话，在Go()中第一个传true
+详情见 VolleyRequestDIY 类, 使用DIY类的话，使用GoDIY(...)
+
+## 自动缓存cookie
+
+原谅我菜， 我看hongyang大哥的session保持，洋洋洒洒用了两个大类， 什么CookieStore啊，什么HttpCookie啊。
+我表示整不懂。。。
+
+### 具体实现
+
+相关类有两个 VolleyUtils 和 VolleyRequest
+
+----------
+[VolleyUtils](https://github.com/mBigFlower/volley-utils/blob/master/app/src/main/java/com/flowerfat/volleyutils/utils/VolleyUtils.java)
+
+若要使用自动保持cookie， 则在VolleyUtils初始化的时候，在application中使用
+
+	VolleyUtils.getInstance().init(this, true); // 比之前多加了个参数 true
+
+具体我们是用SharedPreferences保存的String类型，详见函数 setCookie 与 getCookie
+
+----------
+[VolleyRequest](https://github.com/mBigFlower/volley-utils/blob/master/app/src/main/java/com/flowerfat/volleyutils/utils/VolleyRequest.java)
+
+在请求前从SharedPreferences中获得cookie并放到请求头里， 详见 saveCookie 和 setCookie 。 有自定义需求该这里就好
 
