@@ -1,8 +1,8 @@
-package com.flowerfat.volleyutils.utils;
+package com.flowerfat.volleyutil.utils;
 
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
-import com.flowerfat.volleyutils.io.Callback;
+import com.flowerfat.volleyutil.io.Callback;
 
 import java.util.IdentityHashMap;
 import java.util.Iterator;

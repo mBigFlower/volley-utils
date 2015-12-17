@@ -1,4 +1,4 @@
-package com.flowerfat.volleyutils.utils;
+package com.flowerfat.volleyutil.utils;
 
 import com.android.volley.RetryPolicy;
 

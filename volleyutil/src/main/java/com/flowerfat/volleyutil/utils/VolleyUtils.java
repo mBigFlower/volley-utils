@@ -1,4 +1,4 @@
-package com.flowerfat.volleyutils.utils;
+package com.flowerfat.volleyutil.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -109,6 +109,10 @@ public class VolleyUtils {
         else {
             return null ;
         }
+    }
+
+    public void clearCookie(){
+        cookiePrefs.edit().remove("cookie").apply();
     }
 
 }

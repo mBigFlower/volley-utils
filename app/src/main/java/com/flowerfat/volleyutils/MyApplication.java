@@ -2,7 +2,7 @@ package com.flowerfat.volleyutils;
 
 import android.app.Application;
 
-import com.flowerfat.volleyutils.utils.VolleyUtils;
+import com.flowerfat.volleyutil.utils.VolleyUtils;
 
 /**
  * Created by 明明大美女 on 2015/12/15.
