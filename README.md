@@ -197,3 +197,6 @@
 
 在请求前从SharedPreferences中获得cookie并放到请求头里， 详见 saveCookie 和 setCookie 。 有自定义需求该这里就好
 
+## Https
+
+吃井不忘挖水人，再次感谢hongyang大哥的帮助，看了他的《当okHttp遇到https》，再结合okHttp-Utils这个库中的httpsUtils类，成功实现了Volley的https请求，包括单向和双向验证。

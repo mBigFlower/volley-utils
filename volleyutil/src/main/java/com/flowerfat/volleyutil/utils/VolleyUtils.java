@@ -5,7 +5,11 @@ import android.content.SharedPreferences;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.Volley;
+import com.flowerfat.volleyutil.https.HttpsUtils;
+
+import java.io.InputStream;
 
 /**
  * Created by Bigflower on 2015/12/15.
@@ -39,7 +43,19 @@ public class VolleyUtils {
     public void init(Context context, boolean isAutoCookie) {
         mRequestQueue = Volley.newRequestQueue(context);
         cookiePrefs = context.getSharedPreferences("CookiePrefsFile", 0);
-        this.isAutoCookie = isAutoCookie ;
+        this.isAutoCookie = isAutoCookie;
+    }
+
+    public void init(Context context, InputStream... certificates) {
+        HurlStack hurlStack = new HurlStack(null, HttpsUtils.initCertificates(null, null, certificates));
+        mRequestQueue = Volley.newRequestQueue(context, hurlStack);
+        cookiePrefs = context.getSharedPreferences("CookiePrefsFile", 0);
+    }
+
+    public void init(Context context, InputStream bksFile, String password, InputStream... certificates) {
+        HurlStack hurlStack = new HurlStack(null, HttpsUtils.initCertificates(bksFile, password, certificates));
+        mRequestQueue = Volley.newRequestQueue(context, hurlStack);
+        cookiePrefs = context.getSharedPreferences("CookiePrefsFile", 0);
     }
 
     public void cancel(Object tag) {
@@ -94,8 +110,8 @@ public class VolleyUtils {
     /////////////////////////////////////
     // cookie部分
 
-    public void setAutoCookie(boolean isAutoCookie){
-        this.isAutoCookie = isAutoCookie ;
+    public void setAutoCookie(boolean isAutoCookie) {
+        this.isAutoCookie = isAutoCookie;
     }
 
     public void setCookie(String cookie) {
@@ -107,11 +123,11 @@ public class VolleyUtils {
         if (isAutoCookie)
             return cookiePrefs.getString("cookie", null);
         else {
-            return null ;
+            return null;
         }
     }
 
-    public void clearCookie(){
+    public void clearCookie() {
         cookiePrefs.edit().remove("cookie").apply();
     }
 

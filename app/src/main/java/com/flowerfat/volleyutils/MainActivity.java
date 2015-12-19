@@ -1,5 +1,6 @@
 package com.flowerfat.volleyutils;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.method.ScrollingMovementMethod;
@@ -13,7 +14,7 @@ import com.flowerfat.volleyutil.utils.VolleyUtils;
 
 /**
  * Created by Bigflower on 2015/12/15.
- * <p>
+ * <p/>
  * You should make the VolleyUtils's init at your application
  */
 
@@ -45,6 +46,8 @@ public class MainActivity extends AppCompatActivity {
             httpPost();
         } else if (id == R.id.main_callbackBt) {
             httpCallbackDIY();
+        } else if (id == R.id.main_https) {
+            startActivity(new Intent(this, HttpsActivity.class));
         }
     }
 

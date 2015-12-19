@@ -65,6 +65,7 @@ public class VolleyRequest {
             @Override
             public void onResponse(String response) {
                 saveCookie();
+                listener.onSuccess(response);
                 Log.i("response", response);
             }
         }, new Response.ErrorListener() {
