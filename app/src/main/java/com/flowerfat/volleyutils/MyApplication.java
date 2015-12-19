@@ -18,11 +18,17 @@ public class MyApplication extends Application {
         myApplication = this; // 单例
 
         try {
-            VolleyUtils.getInstance().init(this, getAssets().open("girl_client.bks"),
-                    "123456",getAssets().open("boy_server.cer"));
+            VolleyUtils.getInstance().init(this, getAssets().open("boy_server.cer"));
         } catch (Exception e){
 
         }
+
+//        try {
+//            VolleyUtils.getInstance().init(this, getAssets().open("girl_client.bks"),
+//                    "123456",getAssets().open("boy_server.cer"));
+//        } catch (Exception e){
+//
+//        }
 
     }
 
