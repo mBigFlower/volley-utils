@@ -23,10 +23,10 @@
 - 取消请求
 - DIY封装Callback
 - 自动缓存cookie
+- https
 
 ## 后续添加
 
-- https (找不到资料，有谁会啊)
 - 【邓超的小儿子】
 
 ## 用法示例
@@ -196,4 +196,33 @@
 [VolleyRequest](https://github.com/mBigFlower/volley-utils/blob/master/app/src/main/java/com/flowerfat/volleyutils/utils/VolleyRequest.java)
 
 在请求前从SharedPreferences中获得cookie并放到请求头里， 详见 saveCookie 和 setCookie 。 有自定义需求该这里就好
+
+## Https
+
+吃井不忘挖水人，再次感谢hongyang大哥的帮助，看了他的《当okHttp遇到https》，再结合okHttp-Utils这个库中的httpsUtils类，成功实现了Volley的https请求，包括单向和双向验证。
+
+[我的这篇文章更加详细说明了这部分](http://blog.csdn.net/liudehuaii18/article/details/50358841)
+
+### 添加单向验证证书
+
+依旧实在初始化的时候添加证书，即在Application中
+
+    try {
+        VolleyUtils.getInstance().init(this, getAssets().open("boy_server.cer"));
+    } catch (Exception e){
+
+    }
+
+把我们的证书放到assets中，然后在init中加进去就好
+
+### 添加双向验证证书
+
+	try {
+        VolleyUtils.getInstance().init(this, getAssets().open("girl_client.bks"),
+                "123456",getAssets().open("boy_server.cer"));
+    } catch (Exception e){
+
+    }
+
+这里除了之前的单向的，还要加上另外的一对证书中的一个，以及密码（两个证书注意顺序哈）。证书我们用portecle处理成了bks格式。嗯android就是要bks
 
