@@ -16,7 +16,7 @@ import java.io.InputStream;
  */
 public class VolleyUtils {
 
-    public static final int DEFAULT_MILLISECONDS = 10 * 1000;
+    public static final int DEFAULT_MILLISECONDS = 20 * 1000;
 
     private static VolleyUtils mInstance;
     private RequestQueue mRequestQueue;
@@ -35,7 +35,8 @@ public class VolleyUtils {
         }
         return mInstance;
     }
-
+    /////////////////////////////////////
+    // init
     public void init(Context context) {
         init(context, false);
     }
@@ -68,7 +69,7 @@ public class VolleyUtils {
 
 
     /////////////////////////////////////
-    // 四种请求方法
+    // four request ways
     public VolleyBuilder get() {
         return new VolleyBuilder();
     }
@@ -102,13 +103,13 @@ public class VolleyUtils {
     }
 
     /////////////////////////////////////
-    // 开始请求
+    // request start
     public void build(Request request) {
         mRequestQueue.add(request);
     }
 
     /////////////////////////////////////
-    // cookie部分
+    // cookie
 
     public void setAutoCookie(boolean isAutoCookie) {
         this.isAutoCookie = isAutoCookie;
@@ -131,4 +132,9 @@ public class VolleyUtils {
         cookiePrefs.edit().remove("cookie").apply();
     }
 
+    /////////////////////////////////////
+    // log
+    public void debug(boolean isDebug){
+        L.debug = isDebug ;
+    }
 }

@@ -7,7 +7,6 @@ import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.flowerfat.volleyutil.io.Callback;
 import com.flowerfat.volleyutil.utils.VolleyUtils;
@@ -54,17 +53,18 @@ public class MainActivity extends AppCompatActivity {
     private void httpGet() {
         VolleyUtils.getInstance()
                 .get()
-                .url("http://www.baidu.com")
-                .tag("MainActivity")
+                .url("https://192.168.31.202:4000/goBasic/coach/operation/getStudents")
                 .Go(new Callback<String>() {
                     @Override
                     public void onSuccess(String response) {
+                        Log.i("onError", "right：" + response);
                         contentTV.setText(response);
                     }
 
                     @Override
                     public void onError(String errorInfo) {
-                        Toast.makeText(MainActivity.this, errorInfo, Toast.LENGTH_SHORT).show();
+                        Log.e("onError", "错误信息："+errorInfo);
+                        contentTV.setText(errorInfo);
                     }
                 });
     }
@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
     private void httpPost() {
         VolleyUtils.getInstance()
                 .post()
-                .url("http://192.168.31.202/goBasic/coach/register/login")
+                .url("https://192.168.31.202/goBasic/coach/register/login")
                 .tag("MainActivity")
                 .addParam("phone", "15828433284")
                 .addParam("password", "qqqqqq")
@@ -81,12 +81,14 @@ public class MainActivity extends AppCompatActivity {
                 .Go(new Callback<String>() {
                     @Override
                     public void onSuccess(String response) {
-
+                        Log.i("onError", "right：" + response);
+                        contentTV.setText(response);
                     }
 
                     @Override
                     public void onError(String errorInfo) {
-
+                        Log.e("onError", "错误信息："+errorInfo);
+                        contentTV.setText(errorInfo);
                     }
                 });
     }

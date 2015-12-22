@@ -1,7 +1,5 @@
 package com.flowerfat.volleyutil.utils;
 
-import android.util.Log;
-
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -21,12 +19,12 @@ public class VolleyRequest {
 
         setCookie(builder);
 
-        Log.d("VolleyRequestDIY", "==========================================");
-        Log.i("VolleyRequestDIY", "method:" + builder.method);
-        Log.i("VolleyRequestDIY", "url:" + builder.url);
-        Log.i("VolleyRequestDIY", "params:" + builder.params);
-        Log.i("VolleyRequestDIY", "headers:" + builder.headers);
-        Log.d("VolleyRequestDIY", "==========================================");
+        L.d("==========================================");
+        L.i("method:" + builder.method);
+        L.i("url:" + builder.url);
+        L.i("params:" + builder.params);
+        L.i("headers:" + builder.headers);
+        L.d("==========================================");
 
         if (builder.method == Request.Method.GET || builder.method == Request.Method.DELETE) {
             getAndDelete(builder, listener);
@@ -39,14 +37,13 @@ public class VolleyRequest {
         request = new StringRequest(builder.method, builder.url, builder.params, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Log.i("response", response);
                 saveCookie();
                 listener.onSuccess(response);
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                listener.onError("网络请求出错：\n" + error.getMessage());
+                listener.onError("网络请求出错：\n" + error.toString());
             }
         });
 
@@ -66,7 +63,6 @@ public class VolleyRequest {
             public void onResponse(String response) {
                 saveCookie();
                 listener.onSuccess(response);
-                Log.i("response", response);
             }
         }, new Response.ErrorListener() {
             @Override
@@ -106,7 +102,6 @@ public class VolleyRequest {
     //////////////////////////////////////////////////////////////////////////
     private void saveCookie() {
         String cookie = request.getCookie();
-        Log.i("saveCookie", "saveCookie" + cookie);
         if (cookie != null) {
             VolleyUtils.getInstance().setCookie(cookie);
         }
@@ -114,7 +109,6 @@ public class VolleyRequest {
 
     private void setCookie(VolleyBuilder builder) {
         String cookie = VolleyUtils.getInstance().getCookie();
-        Log.i("setCookie", "setCookie:" + cookie);
         if (cookie != null) {
             if(builder.headers == null) {
                 builder.headers = new IdentityHashMap();
