@@ -229,3 +229,8 @@ ps3:如果你用的是Eclipse，直接copy即可，内容很少
 
 这里除了之前的单向的，还要加上另外的一对证书中的一个，以及密码（两个证书注意顺序哈）。证书我们用portecle处理成了bks格式。嗯android就是要bks
 
+## Log
+默认为debug模式，会打印请求信息，如果不想看log，请：
+
+	VolleyUtils.getInstance().debug(false);
+
