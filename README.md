@@ -204,6 +204,7 @@ ps3:如果你用的是Eclipse，直接copy即可，内容很少
 吃井不忘挖水人，再次感谢hongyang大哥的帮助，看了他的《当okHttp遇到https》，再结合okHttp-Utils这个库中的httpsUtils类，成功实现了Volley的https请求，包括单向和双向验证。
 
 [我的这篇文章更加详细说明了这部分](http://blog.csdn.net/liudehuaii18/article/details/50358841)
+
 [如果服务端证书的生成是用OpenSSL，你可以参考这篇文章](http://blog.csdn.net/liudehuaii18/article/details/50373652)
 
 ### 添加单向验证证书
