@@ -6,7 +6,7 @@ import android.util.Log;
  * Created by 明明大美女 on 2015/12/22.
  */
 public class L {
-    public static boolean debug = false;
+    public static boolean debug = true;
 
     public static void e(String msg)
     {

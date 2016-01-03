@@ -6,7 +6,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.flowerfat.volleyutil.io.Callback;
 
+import java.util.HashMap;
 import java.util.IdentityHashMap;
+import java.util.Map;
 
 /**
  * Created by bigflower on 2015/12/16.

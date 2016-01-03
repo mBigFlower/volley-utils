@@ -25,7 +25,7 @@ ps3:如果你用的是Eclipse，直接copy即可，内容很少
 - 取消请求
 - DIY封装Callback
 - 自动缓存cookie
-- https
+- https（这个post有bug。 你妹的，不仅仅是添加证书这么简单，bug后序解决）
 
 ## 后续添加
 
