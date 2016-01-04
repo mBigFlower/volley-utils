@@ -8,12 +8,12 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
-import com.flowerfat.volleyutil.io.Callback;
-import com.flowerfat.volleyutil.utils.VolleyUtils;
+import com.flowerfat.volleyutil.callback.StringCallback;
+import com.flowerfat.volleyutil.main.VolleyUtils;
 
 /**
  * Created by Bigflower on 2015/12/15.
- * <p/>
+ * <p>
  * You should make the VolleyUtils's init at your application
  */
 
@@ -52,19 +52,20 @@ public class MainActivity extends AppCompatActivity {
 
     private void httpGet() {
         VolleyUtils.getInstance()
-                .get()
-                .url("https://192.168.31.202:4000/goBasic/coach/operation/getStudents")
-                .Go(new Callback<String>() {
+                .post()
+                .url("http://www.baicu.com/")
+                .addHeader("Charset", "UTF-8")
+                .addHeader("content-type", "application/x-www-form-urlencoded")
+                .Go(new StringCallback() {
+
                     @Override
                     public void onSuccess(String response) {
-                        Log.i("onError", "right：" + response);
-                        contentTV.setText(response);
+
                     }
 
                     @Override
-                    public void onError(String errorInfo) {
-                        Log.e("onError", "错误信息："+errorInfo);
-                        contentTV.setText(errorInfo);
+                    public void onError(String e) {
+
                     }
                 });
     }
@@ -72,49 +73,52 @@ public class MainActivity extends AppCompatActivity {
     private void httpPost() {
         VolleyUtils.getInstance()
                 .post()
-                .url("https://192.168.31.202/goBasic/coach/register/login")
+                .url("http://www.baicu.com/")
                 .tag("MainActivity")
                 .addParam("phone", "15828433284")
                 .addParam("password", "qqqqqq")
                 .addHeader("Charset", "UTF-8")
                 .addHeader("content-type", "application/x-www-form-urlencoded")
-                .Go(new Callback<String>() {
+                .Go(new StringCallback() {
                     @Override
                     public void onSuccess(String response) {
-                        Log.i("onError", "right：" + response);
+                        Log.i("onSuccess", "right：" + response);
                         contentTV.setText(response);
                     }
 
                     @Override
                     public void onError(String errorInfo) {
-                        Log.e("onError", "错误信息："+errorInfo);
+                        Log.e("onError", "错误信息：" + errorInfo);
                         contentTV.setText(errorInfo);
                     }
+
                 });
     }
 
     private void httpCallbackDIY() {
         VolleyUtils.getInstance()
                 .post()
-                .url("http://192.168.31.202/goBasic/coach/register/login")
+                .url("http://www.baicu.com/")
                 .tag("MainActivity")
                 .addParam("phone", "15828433284")
                 .addParam("password", "qqqqqq")
                 .addHeader("Charset", "UTF-8")
                 .addHeader("content-type", "application/x-www-form-urlencoded")
-                .GoDIY(new Callback<String>() {
-
+                .Go(new BigCallback() {
                     @Override
                     public void onSuccess(String response) {
-                        Log.i("onSuccess", response);
-                        contentTV.append(response);
+                        Log.i("onSuccess", "right：" + response);
+                        contentTV.setText(response);
                     }
 
                     @Override
                     public void onError(String errorInfo) {
+                        Log.e("onError", "错误信息：" + errorInfo);
                         contentTV.setText(errorInfo);
                     }
+
                 });
+
     }
 
     @Override

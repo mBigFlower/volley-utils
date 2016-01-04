@@ -1,4 +1,4 @@
-package com.flowerfat.volleyutil.utils;
+package com.flowerfat.volleyutil.main;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.NetworkResponse;
@@ -13,13 +13,13 @@ import java.util.Map;
 
 /**
  * Created by Bigflower on 2015/12/15.
- * <p>
  * just do the header
  */
 public class StringRequest extends Request<String> {
     private Response.Listener<String> mListener;
     public Map<String, String> requestHeaders = new HashMap<>();
     public Map<String, String> responseHeaders = new HashMap<>();
+    public Map<String, String> params = new HashMap<>();
 
     public StringRequest(int method, String url, Response.Listener<String> listener,
                          Response.ErrorListener errorListener) {
@@ -31,10 +31,10 @@ public class StringRequest extends Request<String> {
         this(Method.GET, url, listener, errorListener);
     }
 
-    public StringRequest(int method, String url, Map<String, String> headers, Response.Listener<String> listener, Response.ErrorListener errorListener) {
+    public StringRequest(int method, String url, Map<String, String> params, Response.Listener<String> listener, Response.ErrorListener errorListener) {
         super(method, url, errorListener);
         mListener = listener;
-        requestHeaders = headers;
+        this.params = params;
     }
 
     @Override
@@ -54,8 +54,12 @@ public class StringRequest extends Request<String> {
     protected Response<String> parseNetworkResponse(NetworkResponse response) {
         try {
             responseHeaders = response.headers;
-            String parsed = new String(response.data, "UTF-8");
-            return Response.success(parsed, HttpHeaderParser.parseCacheHeaders(response));
+            if (VolleyUtils.Decode == null)
+                return Response.success(new String(response.data), HttpHeaderParser.parseCacheHeaders(response));
+            else {
+                String parsed = new String(response.data, VolleyUtils.Decode);
+                return Response.success(parsed, HttpHeaderParser.parseCacheHeaders(response));
+            }
         } catch (UnsupportedEncodingException e) {
             return Response.error(new ParseError(e));
         }
@@ -64,6 +68,11 @@ public class StringRequest extends Request<String> {
     @Override
     public Map<String, String> getHeaders() throws AuthFailureError {
         return requestHeaders;
+    }
+
+    @Override
+    protected Map<String, String> getParams() throws AuthFailureError {
+        return params;
     }
 
     /**
@@ -89,8 +98,8 @@ public class StringRequest extends Request<String> {
         return responseHeaders;
     }
 
-    public String getCookie(){
-        return responseHeaders.get("set-cookie") ;
+    public String getCookie() {
+        return responseHeaders.get("set-cookie");
     }
 }
 

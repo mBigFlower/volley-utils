@@ -1,14 +1,14 @@
-package com.flowerfat.volleyutil.utils;
+package com.flowerfat.volleyutil.main;
 
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.flowerfat.volleyutil.io.Callback;
+import com.flowerfat.volleyutil.callback.Callback;
+import com.flowerfat.volleyutil.utils.L;
 
-import java.util.HashMap;
+import java.io.IOException;
 import java.util.IdentityHashMap;
-import java.util.Map;
 
 /**
  * Created by bigflower on 2015/12/16.
@@ -17,16 +17,18 @@ public class VolleyRequest {
 
     private StringRequest request;
 
-    public VolleyRequest(VolleyBuilder builder, final Callback listener) {
+    public VolleyRequest(final VolleyBuilder builder, final Callback listener) {
 
         setCookie(builder);
 
+        L.d(" ");
         L.d("==========================================");
         L.i("method:" + builder.method);
         L.i("url:" + builder.url);
         L.i("params:" + builder.params);
         L.i("headers:" + builder.headers);
         L.d("==========================================");
+        L.d(" ");
 
         if (builder.method == Request.Method.GET || builder.method == Request.Method.DELETE) {
             getAndDelete(builder, listener);
@@ -40,7 +42,15 @@ public class VolleyRequest {
             @Override
             public void onResponse(String response) {
                 saveCookie();
-                listener.onSuccess(response);
+                try {
+                    Callback.Decide decide = listener.dataBeautifulPlus(response);
+                    if(decide.isSuccess())
+                        listener.onSuccess(decide.getResult());
+                    else
+                        listener.onError("结果中，你判定为错误：\n" + decide.getResult());
+                } catch (IOException var4) {
+                    listener.onError("自定义回调函数出错：\n" + var4.toString());
+                }
             }
         }, new Response.ErrorListener() {
             @Override
@@ -64,7 +74,15 @@ public class VolleyRequest {
             @Override
             public void onResponse(String response) {
                 saveCookie();
-                listener.onSuccess(response);
+                try {
+                    Callback.Decide decide = listener.dataBeautifulPlus(response);
+                    if(decide.isSuccess())
+                        listener.onSuccess(decide.getResult());
+                    else
+                        listener.onError("结果中，你判定为错误：\n" + decide.getResult());
+                } catch (IOException var4) {
+                    listener.onError("自定义回调函数出错：\n" + var4.toString());
+                }
             }
         }, new Response.ErrorListener() {
             @Override

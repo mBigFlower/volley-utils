@@ -5,10 +5,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.flowerfat.volleyutil.io.Callback;
-import com.flowerfat.volleyutil.utils.VolleyUtils;
+import com.flowerfat.volleyutil.callback.StringCallback;
+import com.flowerfat.volleyutil.main.VolleyUtils;
 
 public class HttpsActivity extends AppCompatActivity {
 
@@ -28,7 +27,7 @@ public class HttpsActivity extends AppCompatActivity {
         VolleyUtils.getInstance()
                 .get(url)
                 .tag("MainActivity")
-                .Go(new Callback<String>() {
+                .Go(new StringCallback() {
                     @Override
                     public void onSuccess(String response) {
                         Log.w("httpClick", response);
@@ -49,7 +48,7 @@ public class HttpsActivity extends AppCompatActivity {
         VolleyUtils.getInstance()
                 .get(url)
                 .tag("MainActivity")
-                .Go(new Callback<String>() {
+                .Go(new StringCallback() {
                     @Override
                     public void onSuccess(String response) {
 

@@ -1,4 +1,4 @@
-package com.flowerfat.volleyutil.utils;
+package com.flowerfat.volleyutil.main;
 
 import com.android.volley.RetryPolicy;
 
@@ -10,12 +10,12 @@ import java.util.Map;
 
 public abstract class BaseBuilder {
 
-    protected int method;
-    protected String url;
-    protected Object tag;
-    protected Map<String, String> headers;
-    protected Map<String, String> params;
-    protected RetryPolicy mRetryPolicy ;
+    public int method;
+    public String url;
+    public Object tag;
+    public Map<String, String> headers;
+    public Map<String, String> params;
+    public RetryPolicy mRetryPolicy ;
 
     public BaseBuilder() {
     }

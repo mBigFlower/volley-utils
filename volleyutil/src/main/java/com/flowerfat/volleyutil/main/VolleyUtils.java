@@ -1,4 +1,4 @@
-package com.flowerfat.volleyutil.utils;
+package com.flowerfat.volleyutil.main;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -8,6 +8,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.Volley;
 import com.flowerfat.volleyutil.https.HttpsUtils;
+import com.flowerfat.volleyutil.utils.L;
 
 import java.io.InputStream;
 
@@ -17,6 +18,7 @@ import java.io.InputStream;
 public class VolleyUtils {
 
     public static final int DEFAULT_MILLISECONDS = 20 * 1000;
+    public static String Decode = null ;
 
     private static VolleyUtils mInstance;
     private RequestQueue mRequestQueue;
@@ -110,7 +112,6 @@ public class VolleyUtils {
 
     /////////////////////////////////////
     // cookie
-
     public void setAutoCookie(boolean isAutoCookie) {
         this.isAutoCookie = isAutoCookie;
     }

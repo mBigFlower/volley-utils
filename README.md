@@ -25,7 +25,7 @@ ps3:如果你用的是Eclipse，直接copy即可，内容很少
 - 取消请求
 - DIY封装Callback
 - 自动缓存cookie
-- https（这个post有bug。 你妹的，不仅仅是添加证书这么简单，bug后序解决）
+- https
 
 ## 后续添加
 
@@ -42,16 +42,17 @@ ps3:如果你用的是Eclipse，直接copy即可，内容很少
                 .addParam("username","bigflower")
                 .addHeader("Charset", "UTF-8")
                 .addHeader("content-type", "application/x-www-form-urlencoded")
-                .Go(new Callback<String>() {
+                .Go(new StringCallback() {
                     @Override
                     public void onSuccess(String response) {
-                        
+                        Log.i("onSuccess", "正确信息：" + response);
                     }
 
                     @Override
                     public void onError(String errorInfo) {
-
+                        Log.e("onError", "错误信息：" + errorInfo);
                     }
+
                 });
 
 当然你也可以这样(把链接放到get里更合理点？)：
@@ -60,16 +61,17 @@ ps3:如果你用的是Eclipse，直接copy即可，内容很少
                 .get("http://www.baidu.com")
                 .params(new HashMap<>())
                 .headers(new HashMap<>())
-                .Go(new Callback() {
+                .Go(new StringCallback() {
                     @Override
-                    public void onSuccess(Object response) {
-
+                    public void onSuccess(String response) {
+                        Log.i("onSuccess", "正确信息：" + response);
                     }
 
                     @Override
                     public void onError(String errorInfo) {
-
+                        Log.e("onError", "错误信息：" + errorInfo);
                     }
+
                 });
 
 ## 改变世界
@@ -78,9 +80,10 @@ ps3:如果你用的是Eclipse，直接copy即可，内容很少
 
 我会抽空写篇这个工具的简介
 
-### 少做重复的事
+### 少做重复的事! 自定义Callback
 
-每个公司的后台不一样，那么网络请求的返回也不同，对于固定的返回，我们可以去fuck这个类：VolleyRequest
+每个公司的后台不一样，那么网络请求的返回也不同，对于固定的返回，我们可以去自定义回调函数
+为了这个，我把Callback弄的累赘的一逼，但是水平有限，只能做到这一步。以后有能力了就改好看点
 
 ----------
 
@@ -134,47 +137,22 @@ ps3:如果你用的是Eclipse，直接copy即可，内容很少
 
 ----------
 
-我们不妨把冗余的动作放到工具类VolleyRequest中， 如下：
+我们不妨把冗余的动作放到工具类BigCallback中， 如下：
 
-	private void doVolleyResponse(String volleyResponse, Callback<String> listener){
-        try {
-            JSONObject response = new JSONObject(volleyResponse);
-            int responseCode = response.getInt("errorCode");
-            switch (responseCode) {
-                case 0:
-                    listener.onSuccess(response.getString("data"));
-                    break;
-                case 1:
-                    listener.onError("1.手机号格式不对");
-                    break;
-                case 2:
-                    listener.onError("2.系统出错");
-                    break;
-            }
-        } catch (Exception e) {
-            listener.onError("catch : "+e.getMessage());
-        }
-    }
+	public abstract class BigCallback extends Callback<String> {
+	    @Override
+	    public Decide dataBeautifulPlus(String response) throws IOException {
+	        return doResponse(response);
+	    }
+	
+	    private Decide doResponse(String response) {
+	        return new Decide(true, "\nI am user design\n\n" + response);
+	    }
+	}
 
-这样我们直接在MainActivity中，这样：
+这里我们引入了一个自定义entity----Decide， 两个参数，第一个是boolean类型，比如返回“手机号格式不对”，则应该执行error回调，这个参数设定为false。如果返回登录成功，则应该执行seccess回调，那么就设定为true；第二个是回传的数据或者是错误的提示。
 
-	...
-	.GoDIY(new Callback<String>() {
-            @Override
-            public void onSuccess(String data) {
-				// 这里data就是我们要处理的数据
-				//eg:
-				User user = new Gson().fromJson(data, User.class);
-            }
 
-            @Override
-            public void onError(String errorInfo) {
-				// 这里我们可以直接输出错误信息
-                Toast.makeText(MainActivity.this, errorInfo, Toast.LENGTH_SHORT).show();
-            }
-        });
-
-详情见 VolleyRequestDIY 类, 使用DIY类的话，使用GoDIY(...)
 
 ## 自动缓存cookie
 
