@@ -10,10 +10,11 @@ import android.widget.TextView;
 
 import com.flowerfat.volleyutil.callback.StringCallback;
 import com.flowerfat.volleyutil.main.VolleyUtils;
+import com.flowerfat.volleyutil.utils.L;
 
 /**
  * Created by Bigflower on 2015/12/15.
- * <p>
+ * <p/>
  * You should make the VolleyUtils's init at your application
  */
 
@@ -52,20 +53,21 @@ public class MainActivity extends AppCompatActivity {
 
     private void httpGet() {
         VolleyUtils.getInstance()
-                .post()
+                .get()
                 .url("http://www.baicu.com/")
                 .addHeader("Charset", "UTF-8")
                 .addHeader("content-type", "application/x-www-form-urlencoded")
                 .Go(new StringCallback() {
-
                     @Override
                     public void onSuccess(String response) {
-
+                        L.i(response);
+                        contentTV.setText(response);
                     }
 
                     @Override
                     public void onError(String e) {
-
+                        L.e(e);
+                        contentTV.setText(e);
                     }
                 });
     }

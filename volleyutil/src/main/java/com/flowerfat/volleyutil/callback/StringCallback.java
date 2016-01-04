@@ -11,7 +11,7 @@ public class StringCallback extends Callback<String> {
 
     @Override
     public Decide dataBeautifulPlus(String response) throws IOException {
-        return null;
+        return new Decide(true, response);
     }
 
     @Override
