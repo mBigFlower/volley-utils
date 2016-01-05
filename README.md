@@ -6,7 +6,7 @@
 
 ## 用法
 
-	compile 'com.flowerfat.volleyutil:volleyutil:0.2.1'
+	compile 'com.flowerfat.volleyutil:volleyutil:0.3.1'
 
 ps1:工具中自带了volley，大家就不要重复添加volley了
 ps2:如果你在用demo测试我的工具，不要忘了在manifest中添加网络权限
