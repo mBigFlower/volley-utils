@@ -25,5 +25,5 @@ dependencies {
     compile project(':volleyutil')
 
 
-    compile 'com.zhy:okhttputils:2.0.2'
+//    compile 'com.zhy:okhttputils:2.0.2'
 }

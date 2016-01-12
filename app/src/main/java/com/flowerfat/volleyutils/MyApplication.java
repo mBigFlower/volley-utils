@@ -24,8 +24,8 @@ public class MyApplication extends Application {
 //        }
 
         try {
-            VolleyUtils.getInstance().init(this, getAssets().open("client.bks"),
-                    "123456",getAssets().open("ca.crt"));
+            VolleyUtils.getInstance().init(this, getAssets().open("girl_client.bks"),
+                    "123456",getAssets().open("boy_server.cer"));
             VolleyUtils.getInstance().setAutoCookie(true);
 //            VolleyUtils.Decode = "GBK";
         } catch (Exception e){
