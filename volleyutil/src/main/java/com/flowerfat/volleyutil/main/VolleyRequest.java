@@ -45,15 +45,15 @@ public class VolleyRequest {
                     if(decide.isSuccess())
                         listener.onSuccess(decide.getResult());
                     else
-                        listener.onError("结果中，你判定为错误：" + decide.getResult());
+                        listener.onError("" + decide.getResult());
                 } catch (IOException var4) {
-                    listener.onError("自定义回调函数出错：" + var4.toString());
+                    listener.onError(var4.toString());
                 }
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                listener.onError("网络请求出错：" + error.toString());
+                listener.onError(error.toString());
             }
         });
 
@@ -77,15 +77,15 @@ public class VolleyRequest {
                     if(decide.isSuccess())
                         listener.onSuccess(decide.getResult());
                     else
-                        listener.onError("结果中，你判定为错误：\n" + decide.getResult());
+                        listener.onError("" + decide.getResult());
                 } catch (IOException var4) {
-                    listener.onError("自定义回调函数出错：\n" + var4.toString());
+                    listener.onError(var4.toString());
                 }
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                listener.onError("网络请求出错：\n" + error.getMessage());
+                listener.onError(error.getMessage());
             }
         });
 
@@ -131,7 +131,7 @@ public class VolleyRequest {
             if(builder.headers == null) {
                 builder.headers = new IdentityHashMap();
             }
-            builder.headers.put("set-cookie", cookie);
+            builder.headers.put("Cookie", cookie);
         }
     }
 

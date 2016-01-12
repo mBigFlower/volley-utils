@@ -26,7 +26,8 @@ public class MyApplication extends Application {
         try {
             VolleyUtils.getInstance().init(this, getAssets().open("client.bks"),
                     "123456",getAssets().open("ca.crt"));
-            VolleyUtils.Decode = "GBK";
+            VolleyUtils.getInstance().setAutoCookie(true);
+//            VolleyUtils.Decode = "GBK";
         } catch (Exception e){
 
         }

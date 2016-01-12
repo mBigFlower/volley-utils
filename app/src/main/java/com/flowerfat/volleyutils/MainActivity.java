@@ -12,6 +12,9 @@ import com.flowerfat.volleyutil.callback.StringCallback;
 import com.flowerfat.volleyutil.main.VolleyUtils;
 import com.flowerfat.volleyutil.utils.L;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Created by Bigflower on 2015/12/15.
  * <p/>
@@ -54,9 +57,7 @@ public class MainActivity extends AppCompatActivity {
     private void httpGet() {
         VolleyUtils.getInstance()
                 .get()
-                .url("http://www.baicu.com/")
-                .addHeader("Charset", "UTF-8")
-                .addHeader("content-type", "application/x-www-form-urlencoded")
+                .url("http://weibo.com/flowerfat")
                 .Go(new StringCallback() {
                     @Override
                     public void onSuccess(String response) {
@@ -70,15 +71,44 @@ public class MainActivity extends AppCompatActivity {
                         contentTV.setText(e);
                     }
                 });
+
     }
 
     private void httpPost() {
+        Map<String, String> data = new HashMap<>();
+        data.put("unionid", "12345677888656");
+        data.put("country", "多分");
+        data.put("city", "阿斯蒂芬采访");
+        data.put("nickname", "二万人发");
+        data.put("language", "山东肥城v");
+        data.put("headimgurl", "http://www.baicu.com");
+        data.put("province", "就fid就fid年");
+        data.put("sex", "1");
+        data.put("openid", "8769806098768790");
+
+//        OkHttpUtils.post()
+//                .url("http://192.168.31.202:4000/zjb/coach/register/loginWithWeChat")
+//                .addHeader("Charset", "UTF-8")
+//                .addHeader("content-type", "application/x-www-form-urlencoded")
+//                .params(data)
+//                .build()
+//                .execute(new com.zhy.http.okhttp.callback.StringCallback() {
+//                    @Override
+//                    public void onError(Request request, Exception e) {
+//                        L.e( e.toString());
+//                    }
+//
+//                    @Override
+//                    public void onResponse(String response) {
+//                        L.i( response);
+//                    }
+//                });
+
         VolleyUtils.getInstance()
                 .post()
-                .url("http://www.baicu.com/")
+                .url("http://192.168.31.139:4000/zjb/coach/register/loginWithWeChat")
                 .tag("MainActivity")
-                .addParam("phone", "15828433284")
-                .addParam("password", "qqqqqq")
+                .params(data)
                 .addHeader("Charset", "UTF-8")
                 .addHeader("content-type", "application/x-www-form-urlencoded")
                 .Go(new StringCallback() {
@@ -100,7 +130,7 @@ public class MainActivity extends AppCompatActivity {
     private void httpCallbackDIY() {
         VolleyUtils.getInstance()
                 .post()
-                .url("http://www.baicu.com/")
+                .url("http://weibo.com/u/1391141497?topnav=1&wvr=6&topsug=1&is_all=1")
                 .tag("MainActivity")
                 .addParam("phone", "15828433284")
                 .addParam("password", "qqqqqq")
