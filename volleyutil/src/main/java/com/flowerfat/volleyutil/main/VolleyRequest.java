@@ -21,12 +21,12 @@ public class VolleyRequest {
 
         setCookie(builder);
 
-        L.d("==========================================");
+        L.i("==========================================");
         L.i("method:" + builder.method);
         L.i("url:" + builder.url);
         L.i("params:" + builder.params);
         L.i("headers:" + builder.headers);
-        L.d("==========================================");
+        L.i("==========================================");
 
         if (builder.method == Request.Method.GET || builder.method == Request.Method.DELETE) {
             getAndDelete(builder, listener);
