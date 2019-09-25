@@ -4,6 +4,9 @@
 
 别问我为什么用Volley，打小就用，顺手了。
 
+## 题外话
+volley貌似已经过气了，整 okhttp 吧 ~
+
 ## 用法
 
 	compile 'com.flowerfat.volleyutil:volleyutil:0.3.4'
